@@ -16,8 +16,15 @@ export default {
         Array.prototype.slice.call(rows).forEach((row) => {
           const cols = row.getElementsByTagName("td");
           Array.prototype.slice.call(cols).forEach((col, index) => {
-            if (/\d+/.exec(col.innerHTML)) {
-              cache[index] = (cache[index] || 0) + parseFloat(col.innerHTML);
+            if (/[\d,]+/.exec(col.innerHTML)) {
+              cache[index] =
+                (cache[index] || 0) +
+                parseFloat(
+                  col.innerHTML
+                    .split("")
+                    .filter((d) => /[\d\.]/.exec(d))
+                    .join("")
+                );
             }
             if (col.innerHTML === "=SUM") {
               col.innerHTML = `<strong>${cache[index]}</strong>`;
