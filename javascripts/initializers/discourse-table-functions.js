@@ -4,7 +4,7 @@ export default {
   name: "discourse-table-functions",
 
   initialize() {
-    withPluginApi("0.12.3", (api) => {
+    withPluginApi((api) => {
       api.decorateCookedElement(
         (post) => {
           const rows = post.getElementsByTagName("tr");
